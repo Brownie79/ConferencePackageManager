@@ -5,9 +5,11 @@
 
 
 //port listener
-app.listen(80, (err) => {
-    if(err) {4870
+app.listen(4870, (err) => {
+    if(err) {
         return console.log("Cannot listen on port 4870 because, ", err);
+    } else {
+        console.log("Server running on port 4870!");
     }
 });
 
