@@ -9,7 +9,7 @@ app.listen(4870, (err) => {
     if(err) {
         return console.log("Cannot listen on port 4870 because, ", err);
     } else {
-        console.log("Server running on port 4870!");
+        console.log("Server running on 162.243.86.227:4870");
     }
 });
 
