@@ -1,6 +1,7 @@
 [
     {
         "name" : "Dev Bharel",
+        "username" : "dbharel",
         "email" : "dev@hawk.iit.edu",
         "attending" : [],
         "organizing" : []
@@ -11,5 +12,6 @@
         "attending" : [],
         "organizing" : []
     }
+    
 ]
 
