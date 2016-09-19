@@ -5,7 +5,12 @@
         "address" : "1871 Merchandise Mart",
         "date" : "11-22-2016",
         "attendees" : [],
-        "image" : "devbharel/cbdc.jpg"
+        "image" : "devbharel/cbdc.jpg",
+        "register_link" : "something.com",
+        "events" : [
+            "skiing", "dancing", ""
+        ]  
+
     },
     {
         "name": "International Air Show",
