@@ -40,6 +40,32 @@ A tool for registrants to view event information, and communicate with fellow pa
 * Front End app with search bar. User A searched for Conference A, gets the information downloaded on the app. Can use the information to guide him throughout the conference. When he searches, the search term is sent as a get request to the NodeJS backend which will query the mongo database, find the relevant package, or return a list of most likely packages that search term matches. These are parsed and sent back to the app as post data. The app renders the JSON object as pictures/data in a nice UI/UX format.
 * On startup, the app will always send a get-request to the server and md5's of the packages and packagesIDs to make sure they are all up to date. Fetch new ones if more information was posted.
 * If we allow for dynamic queries, the user can touch parts of the map and such, and the app will query the offline stored package. Things like notes/bookmarks are saved offline.
+### Things it does:
+1. Displays map
+2. Displays schedule of activities
+3. Provides activity descriptions
+4. Lists special guests with a description
+5. Registers attendee accounts
+6. Registers host accounts
+7. Allows  registrants to communicate with one and other
+8. Allow registrants to link their LinkedIN/Email/etc to it
+9. Allow for push notifications for spontaneous events “Beer Party downtown after last talk!” etc pushed / approved by admins.
+
+### Environment:
+* MongoDB
+* NodeJS
+* Android Java(Android Studio)
+* Github: https://github.com/Brownie79/ConferencePackageManager
+
+### Android App Team:
+* Andrew Zuko Viverito
+* Manny Bardina
+
+### NodeJS Team:
+* Dev Bharel
+* Chuanwei Tu
+* Spriha Jha
+
 
 
 
