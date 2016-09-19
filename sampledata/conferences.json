@@ -14,6 +14,14 @@
         "date" : "05-04-2017",
         "attendees" : [],
         "image" : "harveyspecter/ias.jpg"
-    }
+    },
 
+    {
+        "name" : "EDUCAUSE Annual Conference",
+        "organizer" : "EDUCAUSE",
+        "address" : "Anaheim, CA",
+        "date" : "10-25-2016",
+        "attendees" : ["Susan Cain","Sugata Mitra","Alex Sheen"],
+        "image" : "EDUCAUSE Annual Conference/opening.jpg"
+    }
 ]

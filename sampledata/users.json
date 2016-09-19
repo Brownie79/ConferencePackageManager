@@ -10,6 +10,12 @@
         "email" : "closer@pearsonhardman.com",
         "attending" : [],
         "organizing" : []
+    },
+    {
+        "name" : "Chuanwei Tu",
+        "email" : "ctu5@hawk.iit.edu",
+        "attending" :[],
+        "organizing" : []
     }
 ]
 
