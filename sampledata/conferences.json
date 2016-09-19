@@ -65,5 +65,20 @@
             "Tutorials & Trainings",
             "Forums"
         ]
+    },
+        {
+        "name" : "The 2017 HIMSS Annual Conference & Exhibition",
+        "organizer" : "HIMSS",
+        "address" : "Orange County Convention Center",
+        "date" : "02-19-2017",
+        "attendees" : ["Joseph Bonanno","James Collins","Mary Griskewicz"],
+        "image" : "rsaconference.com/events/us17/register/opening.jpg",
+        "register_link" : "http://www.himssconference.org/register/registration/register-now",
+        "events" :[
+            "Hyatt Regency Orlando",
+            "Chapter Leaders Workshop",
+            "Exhibit Floor Sessions",
+            "Concurrent Education Sessions"
+        ]
     }
 ]
