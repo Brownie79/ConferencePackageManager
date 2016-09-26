@@ -5,7 +5,12 @@
         "address" : "1871 Merchandise Mart",
         "date" : "11-22-2016",
         "attendees" : [],
-        "image" : "devbharel/cbdc.jpg"
+        "image" : "devbharel/cbdc.jpg",
+        "register_link" : "something.com",
+        "events" : [
+            "skiing", "dancing", ""
+        ]  
+
     },
     {
         "name": "International Air Show",
@@ -14,6 +19,66 @@
         "date" : "05-04-2017",
         "attendees" : [],
         "image" : "harveyspecter/ias.jpg"
-    }
+    },
 
+    {
+        "name" : "EDUCAUSE Annual Conference",
+        "organizer" : "EDUCAUSE",
+        "address" : "Anaheim, CA",
+        "date" : "10-25-2016",
+        "attendees" : ["Susan Cain","Sugata Mitra","Alex Sheen"],
+        "image" : "EDUCAUSE Annual Conference/opening.jpg",
+        "register_link" : "https://events.educause.edu/annual-conference/registration",
+        "events" :[
+            "Exhibitor Help Desk Open",
+            "EDUCAUSE Board of Directors Meeting",
+            "Express Registration Check-In",
+            "Internet2 All Day Advisory and Community Meetings"
+        ]
+    },
+     {
+        "name" : "Summer camp for Geeks",
+        "organizer" : "Kalahari Resort",
+        "address" : "1305 Kalahari Drive,Wisconsin Dells, Wisconsin 53965",
+        "date" : "08-10-2016",
+        "attendees" : ["Jeff Blankenburg","Zach Supalla","Keith Casey"],
+        "image" : "thatconference/opening.jpg",
+        "register_link" : "https://www.thatconference.com/Account/Login",
+        "events" :[
+            "Building a Platform on AWS: The good, the bad, and the eventually consistent.",
+            "Scrum is Agile, Agile is NOT Scrum",
+            "Bear Proof Applications: Using Continuous Security to Mitigate Threats",
+            "Before Bootstrap: 100 Years of High-Impact Typography and Grid-Based Design"
+        ]
+    },
+    {
+        "name" : "RSA Conference",
+        "organizer" : "RSA Conference",
+        "address" : "Moscone Center, San Francisco",
+        "date" : "01-13-2017",
+        "attendees" : ["Gasan Awad","Ben Rothke","Gib Sorebo"],
+        "image" : "rsaconference.com/events/us17/register/opening.jpg",
+        "register_link" : "https://www.rsaconference.com/events/us17/register",
+        "events" :[
+            "Innovation Sandbox",
+            "Seminars",
+            "Tutorials & Trainings",
+            "Forums"
+        ]
+    },
+        {
+        "name" : "The 2017 HIMSS Annual Conference & Exhibition",
+        "organizer" : "HIMSS",
+        "address" : "Orange County Convention Center",
+        "date" : "02-19-2017",
+        "attendees" : ["Joseph Bonanno","James Collins","Mary Griskewicz"],
+        "image" : "rsaconference.com/events/us17/register/opening.jpg",
+        "register_link" : "http://www.himssconference.org/register/registration/register-now",
+        "events" :[
+            "Hyatt Regency Orlando",
+            "Chapter Leaders Workshop",
+            "Exhibit Floor Sessions",
+            "Concurrent Education Sessions"
+        ]
+    }
 ]
