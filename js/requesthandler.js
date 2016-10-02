@@ -11,10 +11,10 @@ module.exports = {
         MongoClient.connect(url, (err,db) => { 
             if(err) throw err;
             
-            let coll1 = db.collection("users"); //pre-defined collection users
+            let coll = db.collection("users"); //pre-defined collection users
 
             //inserts new user into the collection "users" one by one   
-            coll1.insertOne(user).then((res) =>{
+            coll.insertOne(user).then((res) =>{
                 console.log("User added: ", res); //displays the doc added
             }); 
             db.close();
@@ -26,26 +26,39 @@ module.exports = {
         MongoClient.connect(url, (err,db) => {
         if(err) throw err;
         
-        let coll2 = db.collection("conferences"); //pre-defined collection conferences
+        let coll = db.collection("conferences"); //pre-defined collection conferences
 
         //inserts new conference into the collection "conferences" one by one 
-        coll2.insertOne(conference).then((res) =>{
+        coll.insertOne(conference).then((res) =>{
             console.log("Conference added: ", res); //displays the doc added
         });
         
         db.close();
     });
-   },
+    },
 
       search_user: function(user){
        MongoClient.connect(url, (err,db) => {
         if(err) throw err;
         
-        let coll3 = db.collection("users"); //pre-defined collection users
+        let coll = db.collection("users"); //pre-defined collection users
 
         //finds the logged-in user in the collection "users" and returns a cursor to it
-        coll3.findOne(user).then((res) =>{
+        coll.findOne( { username: user.username} ).then((res) =>{
             console.log("User Found: ", res); //displays the doc found
+        });
+      }
+    },
+
+      search_conference: function(conference){
+       MongoClient.connect(url, (err,db) => {
+        if(err) throw err;
+        
+        let coll = db.collection("conferences"); //pre-defined collection users
+
+        //finds the event in the collection "conferences" and returns a cursor to it
+        coll.findOne( { eventID: conference.objectID()} ).then((res) =>{
+            console.log("Conference Found: ", res); //displays the doc found
         });
       }
     }
