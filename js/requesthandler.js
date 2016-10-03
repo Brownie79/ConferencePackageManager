@@ -46,6 +46,7 @@ module.exports = {
         //finds the logged-in user in the collection "users" and returns a cursor to it
         coll.findOne( { username: user.username} ).then((res) =>{
             console.log("User Found: ", res); //displays the doc found
+            return user; //logs the user in
         });
       }
     },
@@ -55,11 +56,31 @@ module.exports = {
         if(err) throw err;
         
         let coll = db.collection("conferences"); //pre-defined collection users
-
+        let event_id = conference.id;
+        event_id = new ObjectID();
         //finds the event in the collection "conferences" and returns a cursor to it
-        coll.findOne( { eventID: conference.objectID()} ).then((res) =>{
+        coll.findOne( { ObjectID: {
+            $eq: {event_ID, ObjectID}
+        }   
+    } ).then((res) =>{
             console.log("Conference Found: ", res); //displays the doc found
         });
       }
-    }
+    },
+    
+    print_data: function (user){
+    MongoClient.connect(url, (err,db) => {
+        if(err) throw err;
+
+        let coll = db.collection("users");
+        
+        //prints the data in the collection
+        coll.find().forEach(function(user){
+                print( "User:" + user.name);
+                print( "Username:" + user.username);
+                print( "Email:" + user.email);
+            });
+        db.close();
+    });
+}
 }
