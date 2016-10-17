@@ -1,0 +1,14 @@
+{
+        "name": "Chicago Blockchain Developers Conference",
+        "organizer" : "some userid", 
+        "address" : "1871 Merchandise Mart",
+        "date" : "11-22-2016",
+        "usergroups" : [{"admin" : []}, {"moderator" : []}],
+        "attendees" : [{"user" : "id", "group": "admin"}, {"user" : "123234", "group": "speaker"} ],
+        "image" : "devbharel/cbdc.jpg",
+        "register_link" : "something.com",
+        "events" : [
+            "skiing", "dancing", "blah"
+        ]  
+
+}
