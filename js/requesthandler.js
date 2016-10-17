@@ -37,22 +37,22 @@ module.exports = {
     });
     },
 
-      search_user: function(user){
-       MongoClient.connect(url, (err,db) => {
-        if(err) throw err;
-        
-        let coll = db.collection("users"); //pre-defined collection users
+    search_user: function(user){
+        MongoClient.connect(url, (err,db) => {
+            if(err) throw err;
+            
+            let coll = db.collection("users"); //pre-defined collection users
 
-        //finds the logged-in user in the collection "users" and returns a cursor to it
-        coll.findOne( { username: user.username} ).then((res) =>{
-            console.log("User Found: ", res); //displays the doc found
-            return user; //logs the user in
-        });
-      }
+            //finds the logged-in user in the collection "users" and returns a cursor to it
+            coll.findOne( { username: user.username} ).then((res) =>{
+                console.log("User Found: ", res); //displays the doc found
+                return user; //logs the user in
+            });
+        }
     },
-
-      search_conference: function(conference){
-       MongoClient.connect(url, (err,db) => {
+    
+    search_conference: function(conference){
+        MongoClient.connect(url, (err,db) => {
         if(err) throw err;
         
         let coll = db.collection("conferences"); //pre-defined collection users
@@ -68,19 +68,19 @@ module.exports = {
       }
     },
     
-    print_data: function (user){
-    MongoClient.connect(url, (err,db) => {
-        if(err) throw err;
+    print_users: function (user){
+        MongoClient.connect(url, (err,db) => {
+            if(err) throw err;
 
-        let coll = db.collection("users");
-        
-        //prints the data in the collection
-        coll.find().forEach(function(user){
-                print( "User:" + user.name);
-                print( "Username:" + user.username);
-                print( "Email:" + user.email);
-            });
-        db.close();
-    });
-}
+            let coll = db.collection("users");
+            
+            //prints the data in the collection
+            coll.find().forEach(function(user){
+                    print( "User:" + user.name);
+                    print( "Username:" + user.username);
+                    print( "Email:" + user.email);
+                });
+            db.close();
+        });
+    }
 }

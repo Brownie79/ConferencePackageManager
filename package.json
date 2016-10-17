@@ -16,7 +16,8 @@
     "url": "https://github.com/Brownie79/ConferencePackageManager/issues"
   },
   "dependencies": {
-    "mongodb": "~2.2.9",
-    "express": "~4.14.0"
+    "body-parser": "^1.15.2",
+    "express": "~4.14.0",
+    "mongodb": "~2.2.9"
   }
 }
