@@ -37,17 +37,17 @@ app.get('/login', (req, res) =>{
 
 app.get('/conference', (req, res) => {
     //req.body = {id: objectid}
-    let conf = JSON.stringify(rqhandler.getConference(req.body));
+    let conf = JSON.stringify(rqhandler.getEvent(req.body));
     writeResponse(res, conf);
 });
 
-app.post('/newuser', (req, res) => {
+app.post('/adduser', (req, res) => {
     let userid = JSON.stringify(rqhandler.addUser(req.body));
     writeResponse(res, userid);
 });
 
-app.post('/newconference', (req, res) => {
-    let confid = JSON.stringify(rqhandler.addConference(req.body));
+app.post('/addconference', (req, res) => {
+    let confid = JSON.stringify(rqhandler.addEvent(req.body));
     writeResponse(res, confid);
 });
 

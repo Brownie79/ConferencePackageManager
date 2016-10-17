@@ -59,10 +59,7 @@ module.exports = {
         let event_id = conference.id;
         event_id = new ObjectID();
         //finds the event in the collection "conferences" and returns a cursor to it
-        coll.findOne( { ObjectID: {
-            $eq: {event_ID, ObjectID}
-        }   
-    } ).then((res) =>{
+        coll.findOne( { ObjectID: {$eq: {event_ID, ObjectID}}} ).then((res) =>{
             console.log("Conference Found: ", res); //displays the doc found
         });
       }
