@@ -5,8 +5,7 @@ const ObjectID = require('mongodb').ObjectID;
 
 const url = 'mongodb://localhost:27017/cpm'; //points to the database we'll be using to read/write too
 
-
-export function login(creds){
+let login = function(creds){
     MongoClient.connect(url, (err,db) => { 
         if(err) throw err;
         let coll = db.collection("users"); //pre-defined collection users
@@ -18,7 +17,7 @@ export function login(creds){
     });
 }
 
-export function addEvent(conf){
+let addEvent = function(conf){
     //{userid: ___, confname:____, etc}
     MongoClient.connect(url, (err, db) => {
         if(err) throw err;
@@ -30,7 +29,7 @@ export function addEvent(conf){
     });
 }
 
-export function getEvent(confid){
+let getEvent = function(confid){
     MongoClient.connect(url, (err, db) => {
         if(err) throw err;
         let coll = db.collection("conferences");
@@ -41,7 +40,7 @@ export function getEvent(confid){
     });
 }
 
-export function addUser(user){
+let addUser = function(user){
     MongoClient.connect(url, (err, db) => {
         if(err) throw err;
         let coll = db.collection("users");
@@ -51,7 +50,7 @@ export function addUser(user){
     });
 }
 
-export function updateEvent(conf){
+let updateEvent = function(conf){
     MongoClient.connect(url, (err, db) => {
         if(err) throw err;
         let coll = db.collection("conferences");
@@ -61,7 +60,7 @@ export function updateEvent(conf){
     });
 }
 
-export function updateUser(usr){
+let updateUser = function(usr){
     MongoClient.connect(url, (err, db) => {
         if(err) throw err;
         let coll = db.collection("users");
@@ -71,7 +70,7 @@ export function updateUser(usr){
     });
 }
 
-export function joinEvent(joinreq){
+let joinEvent = function(joinreq){
     /*{
         userid: ____,
         usergroup: "",
@@ -85,7 +84,7 @@ export function joinEvent(joinreq){
     });
 }
 
-export function leaveEvent(leavereq){
+let leaveEvent = function(leavereq){
     /*{
         userid: ____,
         usergroup: "",
@@ -97,4 +96,16 @@ export function leaveEvent(leavereq){
         let coll = db.collection("conferences");
         
     });
+}
+
+
+module.exports = {
+    login : login,
+    addEvent : addEvent,
+    getEvent : getEvent,
+    addUser : addUser,
+    updateEvent : updateEvent,
+    updateUser : updateUser,
+    joinEvent : joinEvent,
+    leaveEvent : leaveEvent
 }
