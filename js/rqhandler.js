@@ -11,7 +11,7 @@ export function login(creds){
         if(err) throw err;
         let coll = db.collection("users"); //pre-defined collection users
         //inserts new user into the collection "users" one by one   
-        coll.findOne({username : creds.username, password: creds.password}}).then((res) =>{
+        coll.findOne({username : creds.username, password: creds.password}).then((res) =>{
             return res;
         }); 
         db.close();
@@ -55,7 +55,7 @@ export function updateEvent(conf){
     MongoClient.connect(url, (err, db) => {
         if(err) throw err;
         let coll = db.collection("conferences");
-        coll.updateOne({"_id" ; ObjectID(conf.id)},conf).then((res)=>{
+        coll.updateOne({"_id" : ObjectID(conf.id)},conf).then((res)=>{
             return res; //return {ackowledged, etc}
         });
     });
@@ -65,7 +65,7 @@ export function updateUser(usr){
     MongoClient.connect(url, (err, db) => {
         if(err) throw err;
         let coll = db.collection("users");
-        coll.updateOne({"_id" ; ObjectID(usr.id)}, usr).then((res)=>{
+        coll.updateOne({"_id" : ObjectID(usr.id)}, usr).then((res)=>{
             return res; //return {ackowledged, etc}
         });
     });
