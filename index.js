@@ -52,7 +52,12 @@ app.post('/addconference', (req, res) => {
 });
 
 app.post('/joinevent', (req, res) => {
-    let success = JSON.stringify(rqhandler.joinevent(req.body));
+    let success = JSON.stringify(rqhandler.joinEvent(req.body));
+    writeResponse(res, success);
+});
+
+app.post('/leaveevent', (req, res) => {
+    let success = JSON.stringify(rqhandler.leaveEvent(req.body));
     writeResponse(res, success);
 });
 

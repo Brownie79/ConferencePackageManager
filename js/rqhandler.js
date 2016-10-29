@@ -74,11 +74,27 @@ export function updateUser(usr){
 export function joinEvent(joinreq){
     /*{
         userid: ____,
+        usergroup: "",
         confid: ____
     }*/
 
     MongoClient.connect(url, (err, db) => {
         if(err) throw err;
-        let coll = conferences
+        let coll = db.collection("conferences");
+        
+    });
+}
+
+export function leaveEvent(leavereq){
+    /*{
+        userid: ____,
+        usergroup: "",
+        confid: ____
+    }*/
+
+    MongoClient.connect(url, (err, db) => {
+        if(err) throw err;
+        let coll = db.collection("conferences");
+        
     });
 }
