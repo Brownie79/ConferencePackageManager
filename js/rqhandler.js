@@ -10,7 +10,7 @@ let login = function(creds){
         if(err) throw err;
         let coll = db.collection("users"); //pre-defined collection users
         //inserts new user into the collection "users" one by one   
-        coll.findOne({username : creds.username, password: creds.password}).then((res) =>{
+        coll.findOne({googleID : creds.googleID}).then((res) =>{
             return res;
         }); 
         db.close();
