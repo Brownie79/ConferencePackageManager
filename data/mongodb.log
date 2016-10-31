@@ -1,0 +1,22 @@
+2016-10-31T20:12:53.145+0000 I CONTROL  [initandlisten] MongoDB starting : pid=18650 port=27017 dbpath=/root/Git/ConferencePackageManager/./data 64-bit host=ubuntu-512mb-nyc2-01
+2016-10-31T20:12:53.145+0000 I CONTROL  [initandlisten] db version v3.2.9
+2016-10-31T20:12:53.145+0000 I CONTROL  [initandlisten] git version: 22ec9e93b40c85fc7cae7d56e7d6a02fd811088c
+2016-10-31T20:12:53.145+0000 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.2g-fips  1 Mar 2016
+2016-10-31T20:12:53.145+0000 I CONTROL  [initandlisten] allocator: tcmalloc
+2016-10-31T20:12:53.145+0000 I CONTROL  [initandlisten] modules: none
+2016-10-31T20:12:53.145+0000 I CONTROL  [initandlisten] build environment:
+2016-10-31T20:12:53.145+0000 I CONTROL  [initandlisten]     distmod: ubuntu1604
+2016-10-31T20:12:53.145+0000 I CONTROL  [initandlisten]     distarch: x86_64
+2016-10-31T20:12:53.145+0000 I CONTROL  [initandlisten]     target_arch: x86_64
+2016-10-31T20:12:53.145+0000 I CONTROL  [initandlisten] options: { processManagement: { fork: true }, storage: { dbPath: "./data" }, systemLog: { destination: "file", path: "./data/mongodb.log" } }
+2016-10-31T20:12:53.202+0000 I -        [initandlisten] Detected data files in /root/Git/ConferencePackageManager/./data created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
+2016-10-31T20:12:53.202+0000 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=1G,session_max=20000,eviction=(threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),checkpoint=(wait=60,log_size=2GB),statistics_log=(wait=0),
+2016-10-31T20:12:53.274+0000 I CONTROL  [initandlisten] ** WARNING: You are running this process as the root user, which is not recommended.
+2016-10-31T20:12:53.274+0000 I CONTROL  [initandlisten] 
+2016-10-31T20:12:53.281+0000 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory '/root/Git/ConferencePackageManager/./data/diagnostic.data'
+2016-10-31T20:12:53.282+0000 I NETWORK  [HostnameCanonicalizationWorker] Starting hostname canonicalization worker
+2016-10-31T20:12:53.283+0000 I NETWORK  [initandlisten] waiting for connections on port 27017
+2016-10-31T20:12:57.977+0000 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:33730 #1 (1 connection now open)
+2016-10-31T20:33:09.591+0000 I NETWORK  [conn1] end connection 127.0.0.1:33730 (0 connections now open)
+2016-10-31T20:33:53.489+0000 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:33732 #2 (1 connection now open)
+2016-10-31T21:06:10.741+0000 I NETWORK  [conn2] end connection 127.0.0.1:33732 (0 connections now open)
