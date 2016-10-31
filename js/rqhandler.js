@@ -29,10 +29,23 @@ let addEvent = function(conf){
     return new Promise(function(resolve, reject){
         MongoClient.connect(url, (err, db) => {
             if(err) reject(err);
+
+            //update admin with having added conference
+            let c2 = db.collection("users");
+
+            //add conference
             let coll = db.collection("conferences");
-            coll.insertOne(conf).then((res) => {
-                resolve(res); //{ackowneldged: true, objectid: "some id"}
-            });
+            coll.insert(conf, function(err, doc){
+                let docID = doc._id;
+                let adminID = conf.organizer;
+                let col2 = db.collection("users");
+                c2.find({"googleID" : conf.organizer}, (err, user) => {
+                    if(err) reject(err);
+                    let attending = user.conferences;
+                    attending.push(docID);
+                    col2.update({ "googleID" : conf.organizer} , { $set: { "conferences" : attending  } }); 
+                });    
+            })
             db.close();
         });
     });
