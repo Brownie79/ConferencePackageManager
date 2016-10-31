@@ -8,10 +8,14 @@ const url = 'mongodb://localhost:27017/cpm'; //points to the database we'll be u
 let login = function(creds){
     return new Promise((resolve,reject) => {
         MongoClient.connect(url, (err,db) => { 
-            if(err) reject(err);
+            if(err) {
+                console.log("error");
+                reject(err);
+            }
             let coll = db.collection("users"); //pre-defined collection users
             //inserts new user into the collection "users" one by one   
             coll.findOne({googleID : creds.googleID}).then((res) =>{
+                console.log("res");
                 resolve(res);
             }); 
             db.close();
