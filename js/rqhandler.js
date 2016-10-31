@@ -36,6 +36,7 @@ let addEvent = function(conf){
             //add conference
             let coll = db.collection("conferences");
             coll.insert(conf, function(err, doc){
+                console.log(doc);
                 let docID = doc._id;
                 let adminID = conf.organizer;
                 let col2 = db.collection("users");
