@@ -57,7 +57,7 @@ let addUser = function(user){
             if(err) reject(err);
             let coll = db.collection("users");
             coll.insertOne(user).then((res)=>{
-                resolve(err); //return {acknowledged: true, objectid: "some id"}
+                resolve(res); //return {acknowledged: true, objectid: "some id"}
             });
         });
     })

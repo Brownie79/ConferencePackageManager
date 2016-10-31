@@ -39,28 +39,33 @@ app.post('/login', (req, res) =>{
 
 app.post('/conference', (req, res) => {
     //req.body = {id: objectid}
-    let conf = JSON.stringify(rqhandler.getEvent(req.body));
-    writeResponse(res, conf);
+    rqhandler.getEvent(req.body).then(function(data){
+        writeResponse(res, JSON.stringify(data));
+    });
 });
 
 app.post('/adduser', (req, res) => {
-    let userid = JSON.stringify(rqhandler.addUser(req.body));
-    writeResponse(res, userid);
+    rqhandler.addUser(req.body).then(function(data){
+        writeResponse(res, JSON.stringify(data));
+    });
 });
 
 app.post('/addconference', (req, res) => {
-    let confid = JSON.stringify(rqhandler.addEvent(req.body));
-    writeResponse(res, confid);
+    rqhandler.addEvent(req.body).then(function(data){
+        writeResponse(res, JSON.stringify(data));
+    });
 });
 
 app.post('/joinevent', (req, res) => {
-    let success = JSON.stringify(rqhandler.joinEvent(req.body));
-    writeResponse(res, success);
+    rqhandler.joinEvent(req.body).then(function(data){
+        writeResponse(res, JSON.stringify(data));
+    });
 });
 
 app.post('/leaveevent', (req, res) => {
-    let success = JSON.stringify(rqhandler.leaveEvent(req.body));
-    writeResponse(res, success);
+    rqhandler.leaveEvent(req.body).then(function(data){
+        writeResponse(res, JSON.stringify(data));
+    });
 });
 
 function writeResponse(res, data){
