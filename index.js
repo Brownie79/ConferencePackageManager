@@ -28,14 +28,14 @@ app.get('/test', (req, res) => {
     res.end();
 });
 
-app.get('/login', (req, res) =>{
+app.post('/login', (req, res) =>{
     //req.body = {user; name, password: pass}
     //res.body = json
     let usr = JSON.stringify(rqhandler.login(req.body));
     writeResponse(res, usr);
 });
 
-app.get('/conference', (req, res) => {
+app.post('/conference', (req, res) => {
     //req.body = {id: objectid}
     let conf = JSON.stringify(rqhandler.getEvent(req.body));
     writeResponse(res, conf);
