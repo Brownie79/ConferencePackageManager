@@ -6,14 +6,16 @@ const ObjectID = require('mongodb').ObjectID;
 const url = 'mongodb://localhost:27017/cpm'; //points to the database we'll be using to read/write too
 
 let login = function(creds){
-    MongoClient.connect(url, (err,db) => { 
-        if(err) throw err;
-        let coll = db.collection("users"); //pre-defined collection users
-        //inserts new user into the collection "users" one by one   
-        coll.findOne({googleID : creds.googleID}).then((res) =>{
-            return res;
-        }); 
-        db.close();
+    return new Promise((resolve,reject) => {
+        MongoClient.connect(url, (err,db) => { 
+            if(err) reject(err);
+            let coll = db.collection("users"); //pre-defined collection users
+            //inserts new user into the collection "users" one by one   
+            coll.findOne({googleID : creds.googleID}).then((res) =>{
+                resolve(res);
+            }); 
+            db.close();
+        });
     });
 }
 
