@@ -6,7 +6,7 @@
     const rqhandler = require('./js/rqhandler');
 
 //middleware for parsing
-app.use(bodyParser.json({ type: 'application/*+json' })); //all res.body & req.body is now a json obj
+app.use(bodyParser.json({ type: 'application/json' })); //all res.body & req.body is now a json obj
 
 //port listener
 app.listen(4870, (err) => {
