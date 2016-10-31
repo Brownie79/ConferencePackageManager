@@ -31,7 +31,7 @@ app.get('/test', (req, res) => {
 app.post('/login', (req, res) =>{
     //req.body = {user; name, password: pass}
     //res.body = json
-    console.log(req.body);
+    //console.log(req.body);
     rqhandler.login(req.body).then(function(data) {
         writeResponse(res,JSON.stringify(data));
     });

@@ -14,9 +14,9 @@ let login = function(creds){
             }
             let coll = db.collection("users"); //pre-defined collection users
             //inserts new user into the collection "users" one by one   
-            console.log("Creds: ", creds.googleID);
+            //console.log("Creds: ", creds.googleID);
             coll.findOne({googleID : creds.googleID}).then((res) =>{
-                console.log(res);
+                //console.log(res);
                 resolve(res);
             }); 
             db.close();
@@ -26,55 +26,65 @@ let login = function(creds){
 
 let addEvent = function(conf){
     //{userid: ___, confname:____, etc}
-    MongoClient.connect(url, (err, db) => {
-        if(err) throw err;
-        let coll = db.collection("conferences");
-        coll.insertOne(conf).then((res) => {
-            return res; //{ackowneldged: true, objectid: "some id"}
+    return new Promise(function(resolve, reject){
+        MongoClient.connect(url, (err, db) => {
+            if(err) reject(err);
+            let coll = db.collection("conferences");
+            coll.insertOne(conf).then((res) => {
+                resolve(res); //{ackowneldged: true, objectid: "some id"}
+            });
+            db.close();
         });
-        db.close();
     });
 }
 
 let getEvent = function(confid){
-    MongoClient.connect(url, (err, db) => {
-        if(err) throw err;
-        let coll = db.collection("conferences");
-        coll.findOne({"_id": ObjectID(confid)}).then((res)=>{
-            return res; //return doc
-        })
-        db.close();
-    });
+    return new Promise(function(resolve,reject){
+        MongoClient.connect(url, (err, db) => {
+            if(err) reject(err);
+            let coll = db.collection("conferences");
+            coll.findOne({"_id": ObjectID(confid)}).then((res)=>{
+                resolve(res); //return doc
+            })
+            db.close();
+        });
+    })
 }
 
 let addUser = function(user){
-    MongoClient.connect(url, (err, db) => {
-        if(err) throw err;
-        let coll = db.collection("users");
-        coll.insertOne(user).then((res)=>{
-            return res; //return {acknowledged: true, objectid: "some id"}
+    return new Promise(function(resolve,reject){
+        MongoClient.connect(url, (err, db) => {
+            if(err) reject(err);
+            let coll = db.collection("users");
+            coll.insertOne(user).then((res)=>{
+                resolve(err); //return {acknowledged: true, objectid: "some id"}
+            });
         });
-    });
+    })
 }
 
 let updateEvent = function(conf){
-    MongoClient.connect(url, (err, db) => {
-        if(err) throw err;
-        let coll = db.collection("conferences");
-        coll.updateOne({"_id" : ObjectID(conf.id)},conf).then((res)=>{
-            return res; //return {ackowledged, etc}
+    return new Promise(function(resolve,reject){
+        MongoClient.connect(url, (err, db) => {
+            if(err) reject(err);
+            let coll = db.collection("conferences");
+            coll.updateOne({"_id" : ObjectID(conf.id)},conf).then((res)=>{
+                resolve(res); //return {ackowledged, etc}
+            });
         });
-    });
+    })
 }
 
 let updateUser = function(usr){
-    MongoClient.connect(url, (err, db) => {
-        if(err) throw err;
-        let coll = db.collection("users");
-        coll.updateOne({"_id" : ObjectID(usr.id)}, usr).then((res)=>{
-            return res; //return {ackowledged, etc}
+    return new Promise(function(resolve, reject){
+        MongoClient.connect(url, (err, db) => {
+            if(err) throw err;
+            let coll = db.collection("users");
+            coll.updateOne({"_id" : ObjectID(usr.id)}, usr).then((res)=>{
+                return res; //return {ackowledged, etc}
+            });
         });
-    });
+    })
 }
 
 let joinEvent = function(joinreq){
