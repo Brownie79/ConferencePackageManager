@@ -14,8 +14,9 @@ let login = function(creds){
             }
             let coll = db.collection("users"); //pre-defined collection users
             //inserts new user into the collection "users" one by one   
+            console.log("Creds: ", creds.googleID);
             coll.findOne({googleID : creds.googleID}).then((res) =>{
-                console.log("res");
+                console.log(res);
                 resolve(res);
             }); 
             db.close();
