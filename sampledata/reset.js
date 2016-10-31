@@ -4,7 +4,7 @@
     const assert = require('assert');
     const ObjectID = require('mongodb').ObjectID;
 
-    const url = 'mongodb://localhost:27017/cpm'; //points to the database we'll be using to read/write too
+    const url = 'mongodb://loScalhost:27017/cpm'; //points to the database we'll be using to read/write too
 
 /*
     Sample Data files are in sampledata/filename.json
