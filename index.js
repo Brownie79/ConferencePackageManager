@@ -81,4 +81,5 @@ function writeResponse(res, data){
     });
     res.write(data);
     res.end();
+    console.log("response: " , res)
 }
