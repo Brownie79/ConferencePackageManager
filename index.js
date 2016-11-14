@@ -29,6 +29,7 @@ app.get('/test', (req, res) => {
 });
 
 app.post('/login', (req, res) =>{
+    console.log(req);
     //req.body = {user; name, password: pass}
     //res.body = json
     //console.log(req.body);
@@ -39,30 +40,35 @@ app.post('/login', (req, res) =>{
 
 app.post('/conference', (req, res) => {
     //req.body = {id: objectid}
+    console.log(req);
     rqhandler.getEvent(req.body).then(function(data){
         writeResponse(res, JSON.stringify(data));
     });
 });
 
 app.post('/adduser', (req, res) => {
+    console.log(req);
     rqhandler.addUser(req.body).then(function(data){
         writeResponse(res, JSON.stringify(data));
     });
 });
 
 app.post('/addconference', (req, res) => {
+    console.log(req);
     rqhandler.addEvent(req.body).then(function(data){
         writeResponse(res, JSON.stringify(data));
     });
 });
 
 app.post('/joinevent', (req, res) => {
+    console.log(req);
     rqhandler.joinEvent(req.body).then(function(data){
         writeResponse(res, JSON.stringify(data));
     });
 });
 
 app.post('/leaveevent', (req, res) => {
+    console.log(req);
     rqhandler.leaveEvent(req.body).then(function(data){
         writeResponse(res, JSON.stringify(data));
     });
