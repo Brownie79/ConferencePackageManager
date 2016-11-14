@@ -74,6 +74,13 @@ app.post('/leaveevent', (req, res) => {
     });
 });
 
+app.post('/updateuser', (req, res) =>{
+    console.log('update user ', req.body);
+    rqhandler.updateUser(req.body).then(function(data){
+        writeResponse(res, JSON.stringify(data));
+    });
+});
+
 function writeResponse(res, data){
     res.writeHead(200, {
         'Content-Type': 'text/json',

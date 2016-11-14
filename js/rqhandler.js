@@ -98,7 +98,7 @@ let updateUser = function(usr){
         MongoClient.connect(url, (err, db) => {
             if(err) throw err;
             let coll = db.collection("users");
-            coll.updateOne({"_id" : ObjectID(usr.id)}, usr).then((res)=>{
+            coll.updateOne({"googleID" : ObjectID(usr.id)}, usr).then((res)=>{
                 return res; //return {ackowledged, etc}
             });
         });
