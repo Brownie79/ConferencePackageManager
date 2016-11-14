@@ -17,6 +17,7 @@ let login = function(creds){
             //console.log("Creds: ", creds.googleID);
             coll.findOne({googleID : creds.googleID}).then((res) =>{
                 //console.log(res);
+                console.log("login successful: ", res)
                 resolve(res);
             }); 
             db.close();
@@ -45,6 +46,7 @@ let addEvent = function(conf){
                     let attending = user.conferences;
                     attending.push(docID);
                     col2.update({ "googleID" : conf.organizer} , { $set: { "conferences" : attending  } }); 
+                    console.log('conf added')
                 });    
             })
             db.close();
@@ -58,6 +60,7 @@ let getEvent = function(confid){
             if(err) reject(err);
             let coll = db.collection("conferences");
             coll.findOne({"_id": ObjectID(confid)}).then((res)=>{
+                console.log('returning event ' , res)
                 resolve(res); //return doc
             })
             db.close();
@@ -71,6 +74,7 @@ let addUser = function(user){
             if(err) reject(err);
             let coll = db.collection("users");
             coll.insertOne(user).then((res)=>{
+                console.log('user added ', res)
                 resolve(res); //return {acknowledged: true, objectid: "some id"}
             });
         });
