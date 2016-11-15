@@ -17,8 +17,23 @@ let login = function(creds){
             //console.log("Creds: ", creds.googleID);
             coll.findOne({googleID : creds.googleID}).then((res) =>{
                 //console.log(res);
-                console.log("login successful: ", res)
-                resolve(res);
+                //if google id not found, then make a new user
+                if(!res){
+                    let user = {
+                        "googleID" : creds.googleID, 
+                        "name" : "", 
+                        "email" : "", 
+                        "conferences" : [] 
+                    }
+                    coll.insertOne(user).then((res)=>{
+                        console.log('user added ', user)
+                        //resolve(res); //return {acknowledged: true, objectid: "some id"}
+                        resolve(user);
+                    });
+                } else {
+                    console.log("login successful: ", res)
+                    resolve(res);
+                }
             }); 
             db.close();
         });
