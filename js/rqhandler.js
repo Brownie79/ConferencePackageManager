@@ -57,7 +57,7 @@ let addEvent = function(conf){
             let confColl = db.collection("conferences");
 
             confColl.insert(conf, function(err, doc){ //adds the conference
-                console.log("adding conf: ", doc);
+                console.log("added conf: ", doc);
                 let docID = doc.insertedIds[0];
                 let adminID = conf.organizer;
                 usersColl.find({"googleID" : conf.organizer}, (err, user) => {
@@ -71,6 +71,7 @@ let addEvent = function(conf){
                     //attending.push(docID); //user is attending this conf
                     usersColl.update({ "googleID" : conf.organizer} , { $set: { "conferences" : attending } }); 
                     console.log('conf added')
+                    resolve({success: true});
                 });    
             });
             db.close();
