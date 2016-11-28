@@ -31,6 +31,10 @@ let login = function(creds){
                     }
                     //console.log("adding user: ", user)
                     coll.insertOne(user, function(err, doc){
+                        if(err){
+                            console.log("error insering doc: ", err);
+                            reject(err);
+                        } 
                         console.log('user added ', doc)
                         resolve(doc);
                     });
