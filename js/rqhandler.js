@@ -27,7 +27,7 @@ let login = function(creds){
                         "googleID" : creds.googleID, 
                         "name" : "", 
                         "email" : "", 
-                        "conferences" : [] 
+                        "conferences" : "" 
                     }
                     coll.insertOne(user).then((res)=>{
                         console.log('user added ', user)
@@ -63,7 +63,12 @@ let addEvent = function(conf){
                 usersColl.find({"googleID" : conf.organizer}, (err, user) => {
                     if(err) reject(err);
                     let attending = user.conferences;
-                    attending.push(docID); //user is attending this conf
+                    if(attending === ""){
+                        attending = docID;
+                    } else {
+                        attending = attending + "," + docID;
+                    }
+                    //attending.push(docID); //user is attending this conf
                     usersColl.update({ "googleID" : conf.organizer} , { $set: { "conferences" : attending } }); 
                     console.log('conf added')
                 });    
@@ -129,7 +134,7 @@ let joinEvent = function(joinreq){
         //add user to conf's attendees
         confColl.find({"_id":ObjectId(joinreq.confID)}, function(err, conf){
             if(err) reject(err);
-            conf.attendees.push(joinreq.userID);
+            conf.attendees = conf.attendees + "," + joinreq.userID;
             confColl.update({"_id":ObjectID(joinreq.confID)}, 
                 {$set: {"attendees": conf.attendees}});
         });
@@ -137,13 +142,26 @@ let joinEvent = function(joinreq){
         //add conf to user's atttending
         userColl.find({"_id":ObjectID(joinreq.userID), function(err, user){
             if(err) reject(err);
-            user.conferences.push(joinreq.confID)
+            if(user.conferences === ""){
+                user.conferences = joinreq.confID;
+            } else {
+                user.conferences = user.conferences + "," + joinreq.confID;
+            }
             userColl.update({"_id":Object(joinreq.userID)}, 
             { $set: {conferences: user.conferences}});            
         }});
         db.close();        
     });
 }
+
+
+
+
+
+
+
+
+
 
 let updateEvent = function(conf){
     return new Promise(function(resolve,reject){
@@ -168,8 +186,6 @@ let updateUser = function(usr){
         });
     })
 }
-
-
 
 let leaveEvent = function(leavereq){
     /*{
