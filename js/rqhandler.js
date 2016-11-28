@@ -33,17 +33,19 @@ let login = function(creds){
                     coll.insertOne(user, function(err, doc){
                         if(err){
                             console.log("error insering doc: ", err);
+                            db.close();
                             reject(err);
                         } 
                         console.log('user added ', doc)
+                        db.close();
                         resolve(doc);
                     });
                 } else {
                     console.log("login successful: ", res)
+                    db.close();
                     resolve(res);
                 }
             }); 
-            db.close();
         });
     });
 }
