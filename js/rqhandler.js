@@ -86,6 +86,7 @@ let addEvent = function(conf){
     });
 }
 
+//needs to have .then cause find() is promise
 let getEventById = function(confid){
     return new Promise(function(resolve,reject){
         MongoClient.connect(url, (err, db) => {
@@ -105,6 +106,12 @@ let getEventByName = function(confName){
         MongoClient.connect(url, (err,db) => {
             if(err) reject(err);
             let confColl = db.collection("conferences");
+            confColl.find({eventName: confName}).then(function(docs){
+                console.log('returning docs by name: ', docs);
+                db.close();
+                resolve(docs);
+            })
+            /*
             confColl.find({eventName: confName}, function(err, docs){
                 if(err) reject(err);
                 //if(!docs) resolve({"success":false});
@@ -112,6 +119,7 @@ let getEventByName = function(confName){
                 db.close();
                 resolve(docs);
             });
+            */
         });
     });
 }
