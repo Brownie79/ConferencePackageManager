@@ -5,6 +5,10 @@ const ObjectID = require('mongodb').ObjectID;
 
 const url = 'mongodb://localhost:27017/cpm'; //points to the database we'll be using to read/write too
 
+/*
+1. Login Existing: GoogleID matches one in DB, return userinfo
+2. Login New: GoogleID doesn't exist, create and return new user
+*/
 let login = function(creds){
     return new Promise((resolve,reject) => {
         MongoClient.connect(url, (err,db) => { 
@@ -47,29 +51,28 @@ let addEvent = function(conf){
             if(err) reject(err);
 
             //update admin with having added conference
-            let c2 = db.collection("users");
-
+            let usersColl = db.collection("users");
             //add conference
-            let coll = db.collection("conferences");
-            coll.insert(conf, function(err, doc){
+            let confColl = db.collection("conferences");
+
+            confColl.insert(conf, function(err, doc){ //adds the conference
                 console.log(doc);
                 let docID = doc._id;
                 let adminID = conf.organizer;
-                let col2 = db.collection("users");
-                c2.find({"googleID" : conf.organizer}, (err, user) => {
+                usersColl.find({"googleID" : conf.organizer}, (err, user) => {
                     if(err) reject(err);
                     let attending = user.conferences;
-                    attending.push(docID);
-                    col2.update({ "googleID" : conf.organizer} , { $set: { "conferences" : attending  } }); 
+                    attending.push(docID); //user is attending this conf
+                    usersColl.update({ "googleID" : conf.organizer} , { $set: { "conferences" : attending } }); 
                     console.log('conf added')
                 });    
-            })
+            });
             db.close();
         });
     });
 }
 
-let getEvent = function(confid){
+let getEventById = function(confid){
     return new Promise(function(resolve,reject){
         MongoClient.connect(url, (err, db) => {
             if(err) reject(err);
@@ -83,18 +86,21 @@ let getEvent = function(confid){
     })
 }
 
-let addUser = function(user){
-    return new Promise(function(resolve,reject){
-        MongoClient.connect(url, (err, db) => {
+let getEventByName = function(confName){
+    return new Promise(function(resolve, reject){
+        MongoClient.connect(url, (err,db) => {
             if(err) reject(err);
-            let coll = db.collection("users");
-            coll.insertOne(user).then((res)=>{
-                console.log('user added ', res)
-                resolve(res); //return {acknowledged: true, objectid: "some id"}
-            });
-        });
+            let confColl = db.collection("conferences");
+            confColl.find({"name": confName}).then((res)=>{
+                console.log('returning events by name', res)
+                resolve(res);
+            })
+        })
     })
 }
+
+
+
 
 let updateEvent = function(conf){
     return new Promise(function(resolve,reject){
@@ -159,3 +165,16 @@ module.exports = {
     joinEvent : joinEvent,
     leaveEvent : leaveEvent
 }
+
+/*let addUser = function(user){
+    return new Promise(function(resolve,reject){
+        MongoClient.connect(url, (err, db) => {
+            if(err) reject(err);
+            let coll = db.collection("users");
+            coll.insertOne(user).then((res)=>{
+                console.log('user added ', res)
+                resolve(res); //return {acknowledged: true, objectid: "some id"}
+            });
+        });
+    })
+}*/
