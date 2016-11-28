@@ -20,7 +20,7 @@ let login = function(creds){
             //inserts new user into the collection "users" one by one   
             //console.log("Creds: ", creds.googleID);
             coll.findOne({googleID : creds.googleID}).then((res) =>{
-                //console.log(res);
+                console.log("Login Response: ", res);
                 //if google id not found, then make a new user
                 if(!res){
                     let user = {
