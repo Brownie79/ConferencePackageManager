@@ -36,9 +36,9 @@ let login = function(creds){
                             db.close();
                             reject(err);
                         } 
-                        console.log('user added ', doc)
+                        console.log('user added: ', doc.ops[0])
                         db.close();
-                        resolve(doc);
+                        resolve(doc.ops[0]);
                     });
                 } else {
                     console.log("login successful: ", res)
