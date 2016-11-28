@@ -5,8 +5,5 @@
     "date" : "11-22-2016",
     "attendees" : ["userid1", "userid2"],
     "image" : "devbharel/cbdc.jpg",
-    "events" : [
-        "skiing", "dancing", "blah"
-    ]  
-
+    "events" : ["skiing", "dancing", "blah"]  
 }

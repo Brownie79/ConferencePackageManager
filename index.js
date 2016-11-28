@@ -63,9 +63,14 @@ app.post('/getEventByName', (req, res) =>{
     });
 });
 
+app.post('/getAllEvents', (req,res) => {
+    console.log("get all events: ", req.body);
+    rqhandler.getAllEvents().then(function(data){
+        writeResponse(res, JSON.stringify(data));
+    });
+});
 
-
-app.post('/joinevent', (req, res) => {
+app.post('/joinEvent', (req, res) => {
     console.log("joinevent: ", req.body);
     rqhandler.joinEvent(req.body).then(function (data) {
         writeResponse(res, JSON.stringify(data));
@@ -85,6 +90,8 @@ app.post('/updateuser', (req, res) => {
         writeResponse(res, JSON.stringify(data));
     });
 });
+
+//app.post('updateconf')
 
 /*//Request handlers
 app.get('/test', (req, res) => {
