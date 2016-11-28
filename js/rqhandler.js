@@ -91,11 +91,11 @@ let getEventById = function(confid){
         MongoClient.connect(url, (err, db) => {
             if(err) reject(err);
             let coll = db.collection("conferences");
-            coll.findOne({"_id": ObjectID(confid)}).then((res)=>{
-                console.log('returning event ' , res)
+            coll.findOne({"_id": ObjectID(confid)}, function(err, doc){
+                console.log('returning event ' , res)           
+                db.close();
                 resolve(res); //return doc
-            })
-            db.close();
+            });
         });
     })
 }
@@ -119,11 +119,11 @@ let getAllEvents = function(){
         MongoClient.connect(url, (err, db) => {
             if(err) reject(err);
             let confColl = db.collection("conferences");
-            confColl.find({}).then(function(res){
+            confColl.find({}, function(err, res){
                 console.log('returning all events:', res);
+                db.close();
                 resolve(res);
-            });
-        db.close();    
+            });    
         });
     });
 }
