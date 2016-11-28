@@ -29,11 +29,10 @@ let login = function(creds){
                         "email" : "", 
                         "conferences" : "" 
                     }
-                    console.log("adding user: ", user)
-                    coll.insertOne(user).then((res)=>{
-                        console.log('user added ', user)
-                        //resolve(res); //return {acknowledged: true, objectid: "some id"}
-                        resolve(user);
+                    //console.log("adding user: ", user)
+                    coll.insertOne(user, function(err, doc){
+                        console.log('user added ', doc)
+                        resolve(doc);
                     });
                 } else {
                     console.log("login successful: ", res)
