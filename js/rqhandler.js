@@ -55,6 +55,7 @@ let addEvent = function(conf){
             let usersColl = db.collection("users");
             //add conference
             let confColl = db.collection("conferences");
+            conf["attendees"] = conf.organizer;
 
             confColl.insert(conf, function(err, doc){ //adds the conference
                 console.log("added conf: ", doc);
