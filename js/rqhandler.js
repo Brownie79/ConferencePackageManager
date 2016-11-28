@@ -57,8 +57,8 @@ let addEvent = function(conf){
             let confColl = db.collection("conferences");
 
             confColl.insert(conf, function(err, doc){ //adds the conference
-                console.log(doc);
-                let docID = doc._id;
+                console.log("adding conf: ", doc);
+                let docID = doc.insertedIds[0];
                 let adminID = conf.organizer;
                 usersColl.find({"googleID" : conf.organizer}, (err, user) => {
                     if(err) reject(err);
