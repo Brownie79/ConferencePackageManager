@@ -105,12 +105,12 @@ let getEventByName = function(confName){
         MongoClient.connect(url, (err,db) => {
             if(err) reject(err);
             let confColl = db.collection("conferences");
-            confColl.find({"name": confName}).then((res)=>{
-                console.log('returning events by name', res);
-                resolve(res);
+            confColl.find({"name": confName}, function(err, docs){
+                console.log('returning events by name', docs);
+                db.close();
+                resolve(docs);
             });
         });
-        db.close()
     });
 }
 
