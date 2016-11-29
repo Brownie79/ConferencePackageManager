@@ -106,20 +106,22 @@ let getEventByName = function(confName){
         MongoClient.connect(url, (err,db) => {
             if(err) reject(err);
             let confColl = db.collection("conferences");
+            /*
             confColl.find({eventName: confName}).then(function(docs){
                 console.log('returning docs by name: ', docs);
                 db.close();
                 resolve(docs);
             })
-            /*
-            confColl.find({eventName: confName}, function(err, docs){
+            */
+            /**/
+            confColl.findOne({eventName: confName}, function(err, docs){
                 if(err) reject(err);
                 //if(!docs) resolve({"success":false});
                 console.log('returning events by name', docs);
                 db.close();
                 resolve(docs);
             });
-            */
+            
         });
     });
 }
@@ -171,14 +173,6 @@ let joinEvent = function(joinreq){
         db.close();        
     });
 }
-
-
-
-
-
-
-
-
 
 
 let updateEvent = function(conf){
