@@ -5,6 +5,14 @@ const app = express();
 const bodyParser = require('body-parser');
 const rqhandler = require('./js/rqhandler');
 
+//middleware to allow requests from other websites
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+
 //middleware for parsing
 app.use(bodyParser.json({
     type: 'application/json'
