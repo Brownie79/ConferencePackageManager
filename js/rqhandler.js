@@ -131,11 +131,20 @@ let getAllEvents = function(){
         MongoClient.connect(url, (err, db) => {
             if(err) reject(err);
             let confColl = db.collection("conferences");
-            confColl.find({}, function(err, res){
-                console.log('returning all events:', res);
+            confColl.find().toArray().then(function(docs){
+                console.log(docs);
+                resolve(docs);
+                db.close();
+            })
+            /*confColl.find({}, function(err, res){
+                let docs = []
+                res.each(function(err, doc) {
+                    docs.push(doc);
+                });
+                console.log('returning all events:', docs);
                 db.close();
                 resolve(res);
-            });    
+            });    */
         });
     });
 }
