@@ -50,6 +50,41 @@ let login = function(creds){
     });
 }
 
+let loginAngular = function(creds){
+    return new Promise((resolve,reject) => {
+        MongoClient.connect(url, (err,db) => { 
+            if(err) {
+                console.log("error");
+                reject(err);
+            }
+            let coll = db.collection("users"); //pre-defined collection users
+            //inserts new user into the collection "users" one by one   
+            //console.log("Creds: ", creds.googleID);
+            coll.findOne({googleID : creds.googleID}).then((res) =>{
+                console.log("Login Response: ", res);
+                //if google id not found, then make a new user
+                if(!res){
+                    //console.log("adding user: ", user)
+                    coll.insertOne(creds, function(err, doc){
+                        if(err){
+                            console.log("error insering doc: ", err);
+                            db.close();
+                            reject(err);
+                        } 
+                        console.log('user added: ', doc.ops[0])
+                        db.close();
+                        resolve(doc.ops[0]);
+                    });
+                } else {
+                    console.log("login successful: ", res)
+                    db.close();
+                    resolve(res.conferences);
+                }
+            }); 
+        });
+    });
+}
+
 let addEvent = function(conf){
     //{userid: ___, confname:____, etc}
     //MAKE SURE USERID ALREADY IN ATTENDING FOR CONFERENCE

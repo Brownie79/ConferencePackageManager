@@ -50,6 +50,14 @@ app.post('/login', (req, res) => {
     });
 });
 
+app.post('/loginAng', (req,res) => {
+    console.log("angular login: ", req.body)
+    rqhandler.loginAngular(req.body).then(function(data){
+        console.log(data);
+        writeResponse(ers, JSON.stringify(data));
+    });
+})
+
 app.post('/addevent', (req, res) => {
     console.log("addevent: ", req.body);
     rqhandler.addEvent(req.body).then(function (data) {
