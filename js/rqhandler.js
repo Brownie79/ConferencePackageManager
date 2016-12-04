@@ -77,8 +77,8 @@ let loginAngular = function(creds){
                     });
                 } else {
                     console.log("login successful: ", res)
-                    db.close();
                     resolve(res.conferences);
+                    db.close();
                 }
             }); 
         });
