@@ -54,7 +54,7 @@ app.post('/loginAng', (req,res) => {
     console.log("angular login: ", req.body)
     rqhandler.loginAngular(req.body).then(function(data){
         console.log(data);
-        writeResponse(ers, JSON.stringify(data));
+        writeResponse(data, JSON.stringify(data));
     });
 })
 
