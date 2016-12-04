@@ -267,7 +267,8 @@ module.exports = {
     updateEvent : updateEvent,
     updateUser : updateUser,
     joinEvent : joinEvent,
-    leaveEvent : leaveEvent
+    leaveEvent : leaveEvent,
+    loginAngular: loginAngular
 }
 
 /*let addUser = function(user){
