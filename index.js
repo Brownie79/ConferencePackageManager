@@ -98,7 +98,7 @@ app.post('/joinEvent', (req, res) => {
     });
 });
 
-app.post('/leaveevent', (req, res) => {
+app.post('/leaveEvent', (req, res) => {
     console.log(req.body);
     rqhandler.leaveEvent(req.body).then(function (data) {
         writeResponse(res, JSON.stringify(data));
