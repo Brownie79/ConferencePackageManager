@@ -201,28 +201,34 @@ let joinEvent = function(joinreq){
                 console.log("conf: ", conf);
                 if(err) reject(err);
                 conf.attendees = conf.attendees + "," + joinreq.userEmail;
-                confColl.update({"_id":ObjectID(joinreq.confID)}, 
-                    {$set: {"attendees": conf.attendees}});
+                confColl.findAndModify(
+                    {"_id":ObjectID(joinreq.confID)},
+                    [], 
+                    {$set: {"attendees": conf.attendees}},
+                    {new: true},
+                    function(err, doc){
+                        console.log("updated conf: ", doc);
+                        //add conf to user's atttending
+                        userColl.findOne({"email":joinreq.userEmail, function(err, user){
+                            if(err){ reject(err); }
+                            console.log("user: " , user);
+                            if(user.conferences == ""){
+                                user.conferences = joinreq.confID;
+                            } else {
+                                user.conferences = user.conferences + "," + joinreq.confID;
+                            }
+                            userColl.findAndModify(
+                                {"email":joinreq.userEmail},
+                                [], 
+                                { $set: {conferences: user.conferences}},
+                                {new: true}, 
+                                function(err, doc){
+                                    resolve({success: "true"});
+                                    db.close();       
+                                });     
+                        }});
+                    });
             });
-
-            //add conf to user's atttending
-            userColl.findOne({"email":joinreq.userEmail, function(err, user){
-                if(err){
-                    console.log(err);
-                    reject(err);
-                } 
-                console.log("user: " , user);
-                if(user.conferences == ""){
-                    user.conferences = joinreq.confID;
-                } else {
-                    user.conferences = user.conferences + "," + joinreq.confID;
-                }
-                userColl.update({"email":joinreq.userEmail}, 
-                    { $set: {conferences: user.conferences}}, function(){
-                        resolve({success: "true"});
-                        db.close();       
-                    });     
-            }});
         });
     });
     
