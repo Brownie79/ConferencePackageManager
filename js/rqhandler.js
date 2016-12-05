@@ -113,7 +113,7 @@ let addEvent = function(conf){
                     //attending.push(docID); //user is attending this conf
                     usersColl.update({ "googleID" : conf.organizer} , { $set: { "conferences" : attending } }); 
                     console.log('conf added')
-                    resolve({success: true});
+                    resolve({"eventID":doc.ops[0]._id});
                 });    
             });
             db.close();
