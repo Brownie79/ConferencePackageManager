@@ -60,7 +60,7 @@ let loginAngular = function(creds){
             let coll = db.collection("users"); //pre-defined collection users
             //inserts new user into the collection "users" one by one   
             //console.log("Creds: ", creds.googleID);
-            coll.findOne({googleID : creds.googleID}).then((res) =>{
+            coll.findOne({email : creds.email}).then((res) =>{
                 console.log("Login Response: ", res);
                 //if google id not found, then make a new user
                 if(!res){
@@ -102,7 +102,7 @@ let addEvent = function(conf){
                 console.log("added conf: ", doc);
                 let docID = doc.insertedIds[0];
                 let adminID = conf.organizer;
-                usersColl.find({"googleID" : conf.organizer}, (err, user) => {
+                usersColl.find({"email" : conf.organizer}, (err, user) => {
                     if(err) reject(err);
                     let attending = user.conferences;
                     if(attending === ""){
@@ -111,7 +111,7 @@ let addEvent = function(conf){
                         attending = attending + "," + docID;
                     }
                     //attending.push(docID); //user is attending this conf
-                    usersColl.update({ "googleID" : conf.organizer} , { $set: { "conferences" : attending } }); 
+                    usersColl.update({ "email" : conf.email} , { $set: { "conferences" : attending } }); 
                     console.log('conf added')
                     resolve({"eventID":doc.ops[0]._id});
                 });    
