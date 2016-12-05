@@ -189,34 +189,40 @@ let joinEvent = function(joinreq){
         userEmail: ____,
         confID: ____
     }*/
-    console.log("joinevent", joinreq);
 
-    MongoClient.connect(url, (err, db) => {
-        if(err) throw err;
-        let confColl = db.collection("conferences");
-        let userColl = db.collection("users");
-        
-        //add user to conf's attendees
-        confColl.find({"_id":ObjectId(joinreq.confID)}, function(err, conf){
-            if(err) reject(err);
-            conf.attendees = conf.attendees + "," + joinreq.userEmail;
-            confColl.update({"_id":ObjectID(joinreq.confID)}, 
-                {$set: {"attendees": conf.attendees}});
+    return new Promise(function(resolve, reject){
+        console.log("joinevent", joinreq);
+
+        MongoClient.connect(url, (err, db) => {
+            if(err) throw err;
+            let confColl = db.collection("conferences");
+            let userColl = db.collection("users");
+            
+            //add user to conf's attendees
+            confColl.find({"_id":ObjectId(joinreq.confID)}, function(err, conf){
+                if(err) reject(err);
+                conf.attendees = conf.attendees + "," + joinreq.userEmail;
+                confColl.update({"_id":ObjectID(joinreq.confID)}, 
+                    {$set: {"attendees": conf.attendees}});
+            });
+
+            //add conf to user's atttending
+            userColl.find({"email":joinreq.userEmail, function(err, user){
+                if(err) reject(err);
+                if(user.conferences === ""){
+                    user.conferences = joinreq.confID;
+                } else {
+                    user.conferences = user.conferences + "," + joinreq.confID;
+                }
+                userColl.update({"email":joinreq.userEmail}, 
+                    { $set: {conferences: user.conferences}}, function(){
+                        resolve({success: "true"});
+                        db.close();       
+                    });     
+            }});
         });
-
-        //add conf to user's atttending
-        userColl.find({"email":joinreq.userEmail, function(err, user){
-            if(err) reject(err);
-            if(user.conferences === ""){
-                user.conferences = joinreq.confID;
-            } else {
-                user.conferences = user.conferences + "," + joinreq.confID;
-            }
-            userColl.update({"email":joinreq.userEmail}, 
-            { $set: {conferences: user.conferences}});            
-        }});
-        db.close();        
     });
+    
 }
 
 let leaveEvent = function(joinreq){
@@ -225,48 +231,52 @@ let leaveEvent = function(joinreq){
         confID: ____
     }*/
 
-    MongoClient.connect(url, (err, db) => {
-        if(err) throw err;
-        let confColl = db.collection("conferences");
-        let userColl = db.collection("users");
+    return new Promise(function(resolve, reject){
+        MongoClient.connect(url, (err, db) => {
+            if(err) throw err;
+            let confColl = db.collection("conferences");
+            let userColl = db.collection("users");
 
 
-        //remove user from conf's attendees
-        confColl.find({"_id":ObjectId(joinreq.confID)}, function(err, conf){
-            if(err) reject(err);
+            //remove user from conf's attendees
+            confColl.find({"_id":ObjectId(joinreq.confID)}, function(err, conf){
+                if(err) reject(err);
 
-            //can't remove user if organizing
-            if(conf.organizer == joinreq.userEmail){
-                console.log("can't remove organizer");
-                db.close();
-                return;
-            }
+                //can't remove user if organizing
+                if(conf.organizer == joinreq.userEmail){
+                    console.log("can't remove organizer");
+                    db.close();
+                    return;
+                }
 
 
-            let attendees = conf.attendees.split(",");
-            attendees.splice(attendees.indexOf(joinreq.userEmail), 1);
-            let nAttendees = "";
-            for(let a in attendees){
-                nAttendees = nAttendees + "," + a;
-            }
-            confColl.update({"_id":ObjectID(joinreq.confID)}, 
-                {$set: {"attendees": nAttendees}});
-        });
+                let attendees = conf.attendees.split(",");
+                attendees.splice(attendees.indexOf(joinreq.userEmail), 1);
+                let nAttendees = "";
+                for(let a in attendees){
+                    nAttendees = nAttendees + "," + a;
+                }
+                confColl.update({"_id":ObjectID(joinreq.confID)}, 
+                    {$set: {"attendees": nAttendees}});
+            });
 
-        //remove conf from user's atttending
-        userColl.find({"email":joinreq.userEmail, function(err, user){
-            if(err) reject(err);
-            let usrconf = user.conferences.split(",");
-            usrconf.splice(usrconf.indexOf(joinreq.confID),1);
-            let nconf = "";
-            for(let c of usrconf){
-                nconf = nconf + "," + c;
-            }
-            userColl.update({"email":joinreq.userEmail}, 
-            { $set: {conferences: nconf}});            
-        }});
-        db.close();        
-    });
+            //remove conf from user's atttending
+            userColl.find({"email":joinreq.userEmail, function(err, user){
+                if(err) reject(err);
+                let usrconf = user.conferences.split(",");
+                usrconf.splice(usrconf.indexOf(joinreq.confID),1);
+                let nconf = "";
+                for(let c of usrconf){
+                    nconf = nconf + "," + c;
+                }
+                userColl.update({"email":joinreq.userEmail}, 
+                { $set: {conferences: nconf}}, function(){
+                    resolve({success: 'true'});
+                    db.close();
+                });            
+            }});
+        });                
+    })
 }
 
 let updateEvent = function(conf){
