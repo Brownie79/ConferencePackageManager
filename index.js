@@ -33,7 +33,7 @@ function writeResponse(res, data) {
         'Content-Length': data.length
     });
     res.write(data);
-    console.log("response: ", data)
+    //console.log("response: ", data)
     res.end();
     //console.log("response: " , res)
 }
@@ -56,7 +56,7 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/loginAng', (req,res) => {
-    console.log("angular login: ", req.body)
+    //console.log("angular login: ", req.body)
     rqhandler.loginAngular(req.body).then(function(data){
         console.log(data);
         writeResponse(res, JSON.stringify(data));
