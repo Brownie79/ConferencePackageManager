@@ -263,7 +263,8 @@ let leaveEvent = function(joinreq){
 
                 let attendees = conf.attendees.split(",");
                 attendees.splice(attendees.indexOf(joinreq.userEmail), 1);
-                let nAttendees = "";
+                console.log("conf attenees after leave: ", attendees);
+                let nAttendees;
                 for(let a in attendees){
                     nAttendees = nAttendees + "," + a;
                 }
