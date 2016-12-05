@@ -285,7 +285,7 @@ let leaveEvent = function(joinreq){
                     resolve({success: 'true'});
                     db.close();
                 });            
-            }});
+            });
         });                
     })
 }
