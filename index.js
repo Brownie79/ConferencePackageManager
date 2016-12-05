@@ -33,7 +33,7 @@ function writeResponse(res, data) {
         'Content-Length': data.length
     });
     res.write(data);
-    //console.log("response: ", data)
+    console.log("response: ", data)
     res.end();
     //console.log("response: " , res)
 }

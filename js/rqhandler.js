@@ -197,7 +197,7 @@ let joinEvent = function(joinreq){
             let userColl = db.collection("users");
             
             //add user to conf's attendees
-            confColl.find({"_id":ObjectID(joinreq.confID)}, function(err, conf){
+            confColl.findOne({"_id":ObjectID(joinreq.confID)}, function(err, conf){
                 console.log("conf attendees: ", conf.attendees);
                 if(err) reject(err);
                 conf.attendees = conf.attendees + "," + joinreq.userEmail;
@@ -206,7 +206,7 @@ let joinEvent = function(joinreq){
             });
 
             //add conf to user's atttending
-            userColl.find({"email":joinreq.userEmail, function(err, user){
+            userColl.findOne({"email":joinreq.userEmail, function(err, user){
                 if(err){
                     console.log(err);
                     reject(err);
@@ -242,7 +242,7 @@ let leaveEvent = function(joinreq){
 
 
             //remove user from conf's attendees
-            confColl.find({"_id":ObjectID(joinreq.confID)}, function(err, conf){
+            confColl.findOne({"_id":ObjectID(joinreq.confID)}, function(err, conf){
                 if(err) reject(err);
 
                 //can't remove user if organizing
@@ -264,7 +264,7 @@ let leaveEvent = function(joinreq){
             });
 
             //remove conf from user's atttending
-            userColl.find({"email":joinreq.userEmail, function(err, user){
+            userColl.findOne({"email":joinreq.userEmail, function(err, user){
                 if(err) reject(err);
                 let usrconf = user.conferences.split(",");
                 usrconf.splice(usrconf.indexOf(joinreq.confID),1);
