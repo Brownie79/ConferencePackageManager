@@ -266,7 +266,11 @@ let leaveEvent = function(joinreq){
                 console.log("conf attenees after leave: ", attendees);
                 let nAttendees;
                 for(let a of attendees){
-                    nAttendees = nAttendees + "," + a;
+                    if(nAttendees == undefined){
+                        nAttendees = a;
+                    } else {
+                        nAttendees = nAttendees + "," + a;
+                    }
                 }
                 confColl.update({"_id":ObjectID(joinreq.confID)}, 
                     {$set: {"attendees": nAttendees}});
