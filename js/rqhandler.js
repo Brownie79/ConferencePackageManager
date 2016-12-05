@@ -71,12 +71,12 @@ let loginAngular = function(creds){
                             db.close();
                             reject(err);
                         } 
-                        console.log('user added: ', doc.ops[0])
+                        //console.log('user added: ', doc.ops[0])
                         db.close();
                         resolve(doc.ops[0]);
                     });
                 } else {
-                    console.log("login successful: ", res)
+                    //console.log("login successful: ", res)
                     resolve(res);
                     db.close();
                 }
@@ -189,6 +189,7 @@ let joinEvent = function(joinreq){
         userEmail: ____,
         confID: ____
     }*/
+    console.log("joinevent", joinreq);
 
     MongoClient.connect(url, (err, db) => {
         if(err) throw err;

@@ -50,7 +50,7 @@ app.post('/login', (req, res) => {
     //res.body = json
     //console.log(req.body);
     rqhandler.login(req.body).then(function (data) {
-        console.log(data)
+        //console.log(data)
         writeResponse(res, JSON.stringify(data));
     });
 });
