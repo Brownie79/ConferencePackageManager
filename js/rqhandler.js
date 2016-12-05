@@ -198,7 +198,7 @@ let joinEvent = function(joinreq){
             
             //add user to conf's attendees
             confColl.findOne({"_id":ObjectID(joinreq.confID)}, function(err, conf){
-                console.log("conf attendees: ", conf.attendees);
+                console.log("conf: ", conf);
                 if(err) reject(err);
                 conf.attendees = conf.attendees + "," + joinreq.userEmail;
                 confColl.update({"_id":ObjectID(joinreq.confID)}, 
@@ -211,7 +211,7 @@ let joinEvent = function(joinreq){
                     console.log(err);
                     reject(err);
                 } 
-                console.log("user conferences: " , user.conferences);
+                console.log("user: " , user);
                 if(user.conferences == ""){
                     user.conferences = joinreq.confID;
                 } else {
