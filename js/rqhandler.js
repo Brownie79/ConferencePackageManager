@@ -191,15 +191,13 @@ let joinEvent = function(joinreq){
     }*/
 
     return new Promise(function(resolve, reject){
-        console.log("joinevent", joinreq);
-
         MongoClient.connect(url, (err, db) => {
             if(err) throw err;
             let confColl = db.collection("conferences");
             let userColl = db.collection("users");
             
             //add user to conf's attendees
-            confColl.find({"_id":ObjectId(joinreq.confID)}, function(err, conf){
+            confColl.find({"_id":ObjectID(joinreq.confID)}, function(err, conf){
                 if(err) reject(err);
                 conf.attendees = conf.attendees + "," + joinreq.userEmail;
                 confColl.update({"_id":ObjectID(joinreq.confID)}, 
@@ -239,7 +237,7 @@ let leaveEvent = function(joinreq){
 
 
             //remove user from conf's attendees
-            confColl.find({"_id":ObjectId(joinreq.confID)}, function(err, conf){
+            confColl.find({"_id":ObjectID(joinreq.confID)}, function(err, conf){
                 if(err) reject(err);
 
                 //can't remove user if organizing
