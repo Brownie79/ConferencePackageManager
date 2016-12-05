@@ -265,7 +265,7 @@ let leaveEvent = function(joinreq){
                 attendees.splice(attendees.indexOf(joinreq.userEmail), 1);
                 console.log("conf attenees after leave: ", attendees);
                 let nAttendees;
-                for(let a in attendees){
+                for(let a of attendees){
                     nAttendees = nAttendees + "," + a;
                 }
                 confColl.update({"_id":ObjectID(joinreq.confID)}, 
