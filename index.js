@@ -38,6 +38,10 @@ function writeResponse(res, data) {
     //console.log("response: " , res)
 }
 
+app.get('/', (req, res) => {
+    res.write("Conference Package Manger running on Port 4870");
+})
+
 //working as intended
 app.post('/login', (req, res) => {
     console.log("login: ", req.body);
