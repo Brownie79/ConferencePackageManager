@@ -40,6 +40,7 @@ function writeResponse(res, data) {
 
 app.get('/', (req, res) => {
     res.write("Conference Package Manger running on Port 4870");
+    res.end();
 })
 
 //working as intended
