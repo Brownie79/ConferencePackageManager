@@ -272,7 +272,7 @@ let leaveEvent = function(joinreq){
             });
 
             //remove conf from user's atttending
-            userColl.findOne({"email":joinreq.userEmail, function(err, user){
+            userColl.findOne({"email":joinreq.userEmail}, function(err, user){
                 if(err) reject(err);
                 let usrconf = user.conferences.split(",");
                 usrconf.splice(usrconf.indexOf(joinreq.confID),1);
