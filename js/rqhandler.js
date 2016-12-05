@@ -206,8 +206,9 @@ let joinEvent = function(joinreq){
 
             //add conf to user's atttending
             userColl.find({"email":joinreq.userEmail, function(err, user){
+                console.log("user conferences: " , user.conferences);
                 if(err) reject(err);
-                if(user.conferences === ""){
+                if(user.conferences == ""){
                     user.conferences = joinreq.confID;
                 } else {
                     user.conferences = user.conferences + "," + joinreq.confID;
