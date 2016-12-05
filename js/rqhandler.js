@@ -208,26 +208,28 @@ let joinEvent = function(joinreq){
                     {new: true},
                     function(err, doc){
                         console.log("updated conf: ", doc);
-                        //add conf to user's atttending
-                        userColl.findOne({"email":joinreq.userEmail, function(err, user){
-                            if(err){ reject(err); }
-                            console.log("user: " , user);
-                            if(user.conferences == ""){
-                                user.conferences = joinreq.confID;
-                            } else {
-                                user.conferences = user.conferences + "," + joinreq.confID;
-                            }
-                            userColl.findAndModify(
-                                {"email":joinreq.userEmail},
-                                [], 
-                                { $set: {conferences: user.conferences}},
-                                {new: true}, 
-                                function(err, doc){
-                                    resolve({success: "true"});
-                                    db.close();       
-                                });     
-                        }});
+                        
                     });
+            });
+
+            //add conf to user's atttending
+            userColl.findOne({"email":joinreq.userEmail}, function(err, user){
+                if(err){ reject(err); }
+                console.log("user: " , user);
+                if(user.conferences == ""){
+                    user.conferences = joinreq.confID;
+                } else {
+                    user.conferences = user.conferences + "," + joinreq.confID;
+                }
+                userColl.findAndModify(
+                    {"email":joinreq.userEmail},
+                    [], 
+                    { $set: {conferences: user.conferences}},
+                    {new: true}, 
+                    function(err, doc){
+                        resolve({success: "true"});
+                        db.close();       
+                    });     
             });
         });
     });
